@@ -6,8 +6,12 @@
         </div>
         <ul class="mt-md-5 mt-lg-4">
             <li><a href="/dashboard">Dashboard</a></li>
-            <li><a href="/dashboard/cars">Cars</a></li>
-            <li><a href="/dashboard/paket">Package</a></li>
+            <li><a href="/personal">Personal</a></li>
+            <li><a href="/toko">Toko</a></li>
+            <li><a href="/position">Posisi</a></li>
+            <li><a href="/user">Akun</a></li>
+
+            <li><a href="/gudang">Gudang</a></li>
         </ul>
     </div>
 </div>

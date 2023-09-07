@@ -13,7 +13,7 @@ class TokoController extends Controller
      */
     public function index()
     {
-        //
+        return view('dashboard.toko.index');
     }
 
     /**
@@ -21,7 +21,7 @@ class TokoController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.toko.create');
     }
 
     /**
@@ -37,7 +37,7 @@ class TokoController extends Controller
      */
     public function show(Toko $toko)
     {
-        //
+        
     }
 
     /**
@@ -45,7 +45,7 @@ class TokoController extends Controller
      */
     public function edit(Toko $toko)
     {
-        //
+        return view('dashboard.toko.edit');
     }
 
     /**

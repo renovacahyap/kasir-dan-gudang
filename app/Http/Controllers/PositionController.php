@@ -13,7 +13,7 @@ class PositionController extends Controller
      */
     public function index()
     {
-        //
+        return view('dashboard.posisi.index');
     }
 
     /**
@@ -21,7 +21,7 @@ class PositionController extends Controller
      */
     public function create()
     {
-        //
+       return view('dashboard.posisi.create');
     }
 
     /**
@@ -37,7 +37,7 @@ class PositionController extends Controller
      */
     public function show(Position $position)
     {
-        //
+        
     }
 
     /**
@@ -45,7 +45,7 @@ class PositionController extends Controller
      */
     public function edit(Position $position)
     {
-        //
+        return view('dashboard.posisi.edit');
     }
 
     /**

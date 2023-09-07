@@ -13,7 +13,7 @@ class GudangController extends Controller
      */
     public function index()
     {
-        //
+        return view('dashboard.gudang.index');
     }
 
     /**
@@ -21,7 +21,7 @@ class GudangController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.gudang.create');
     }
 
     /**
@@ -37,7 +37,7 @@ class GudangController extends Controller
      */
     public function show(Gudang $gudang)
     {
-        //
+        
     }
 
     /**
@@ -45,7 +45,7 @@ class GudangController extends Controller
      */
     public function edit(Gudang $gudang)
     {
-        //
+        return view('dashboard.gudang.edit');
     }
 
     /**

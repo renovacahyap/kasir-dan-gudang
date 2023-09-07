@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\PersonalController;
+use App\Http\Controllers\UserController;
+use App\Models\Toko;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,5 +17,23 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('dashboard.index.index');
 });
+
+
+// admin
+Route::resource('/user',UserController::class);
+Route::resource('/personal',PersonalController::class);
+Route::resource('/toko',TokoController::class);
+Route::resource('/position',PositionController::class);
+
+
+
+// gudang
+Route::resource('/gudang',GudangController::class);
+
+
+// kasir
+Route::resource('/pembelian',PembelianController::class);
+
+// Route::resource('/user',PersonalController::class);

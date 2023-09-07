@@ -1,5 +1,5 @@
 @extends('dashboard.layouts.main')
-@section('contents')
+@section('container')
 
 <!-- Greeting Login -->
 <div class="profile my-5">

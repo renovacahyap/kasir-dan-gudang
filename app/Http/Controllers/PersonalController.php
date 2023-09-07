@@ -13,7 +13,7 @@ class PersonalController extends Controller
      */
     public function index()
     {
-        //
+       return view('dashboard.personal.index');
     }
 
     /**
@@ -21,7 +21,7 @@ class PersonalController extends Controller
      */
     public function create()
     {
-        //
+        return view('dashboard.personal.create');
     }
 
     /**
@@ -37,7 +37,7 @@ class PersonalController extends Controller
      */
     public function show(Personal $personal)
     {
-        //
+       
     }
 
     /**
@@ -45,7 +45,7 @@ class PersonalController extends Controller
      */
     public function edit(Personal $personal)
     {
-        //
+        return view('dashboard.toko.edit');
     }
 
     /**
