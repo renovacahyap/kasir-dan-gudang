@@ -11,7 +11,7 @@ class StorePembelianRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,10 @@ class StorePembelianRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+           'invoice_id' => 'required',
+           'gudang_id' => 'required',
+           'qty' => 'required',
+           'total_harga' => 'required'
         ];
     }
 }

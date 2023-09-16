@@ -10,24 +10,21 @@
 <!-- card section -->
 <div class="container p-3">
 
-    <a class="btn btn-dark mb-3" href="/personal/create" role="button">Tambah Personal</a> <br>
+    {{-- <a class="btn btn-dark mb-3" href="/personal/create" role="button">Tambah Personal</a> <br> --}}
     
-    <form action="" method="post">
+    <form action="/toko/{{ $toko->id }}" method="post">
+        @method('put')
         @csrf
-        <label for="">Nama</label><br>
-        <select name="" id="">
-            <option value="">jonson</option>
-        </select><br>
+        <label for="">Nama Toko</label><br>
+        <input type="text" class="form-control" name="nama_toko" id="" value="{{ $toko->nama_toko }}">
+        
+        <label for="">Alamat</label><br>
+        <div class="form-floating">
+            <textarea class="form-control" name="alamat" placeholder="Alamat" id="floatingTextarea2" style="height: 100px">{{ $toko->alamat }}</textarea>
+            <label for="floatingTextarea2" >Alamat</label>
+        </div>
 
-        <label for="">Toko</label><br>
-        <select name="" id="">
-            <option value=""></option>
-        </select><br>
-
-        <label for="">Nama</label><br>
-        <select name="" id="">
-            <option value=""></option>
-        </select>
+        <button type="submit" class="btn btn-dark">Edit Toko</button>
     </form>
 </div>
 <!-- End Card Section -->

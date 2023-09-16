@@ -11,20 +11,20 @@ class Personal extends Model
     protected $guarded = ['id'];
 
 
-    public function gudangs() {
-        return $this->belongsTo(Gudang::class);
+    public function gudang() {
+        return $this->hasMany(Gudang::class);
     }
 
-    public function tokos(){
-        return $this->hasMany(Toko::class);
+    public function toko(){
+        return $this->belongsTo(Toko::class);
     }
 
-    public function users() {
-        return $this->hasMany(User::class);
+    public function user() {
+        return $this->belongsTo(User::class);
     }
 
     public function position(){
-        return $this->hasMany(Position::class);
+        return $this->belongsTo(Position::class);
     }
 
 

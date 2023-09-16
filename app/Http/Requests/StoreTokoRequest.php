@@ -11,7 +11,7 @@ class StoreTokoRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,8 @@ class StoreTokoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'nama_toko'=> 'required',
+            'alamat'=>'required'
         ];
     }
 }

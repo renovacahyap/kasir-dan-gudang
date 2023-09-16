@@ -11,7 +11,7 @@ class UpdateGudangRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,11 @@ class UpdateGudangRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'kode_barang' => 'required',
+            'nama_barang' => 'required',
+            'stock' => 'required',
+            'harga' => 'required',
+            'personal_id' => 'required'
         ];
     }
 }

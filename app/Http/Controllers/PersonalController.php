@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Personal;
 use App\Http\Requests\StorePersonalRequest;
 use App\Http\Requests\UpdatePersonalRequest;
+use App\Models\Position;
+use App\Models\Toko;
+use App\Models\User;
 
 class PersonalController extends Controller
 {
@@ -13,7 +16,9 @@ class PersonalController extends Controller
      */
     public function index()
     {
-       return view('dashboard.personal.index');
+       return view('dashboard.personal.index',[
+        'data'=>Personal::all()
+       ]);
     }
 
     /**
@@ -21,7 +26,11 @@ class PersonalController extends Controller
      */
     public function create()
     {
-        return view('dashboard.personal.create');
+        return view('dashboard.personal.create',[
+            'user'=>User::all(),
+            'toko'=>Toko::all(),
+            'posisi'=>Position::all()
+        ]);
     }
 
     /**
@@ -29,7 +38,9 @@ class PersonalController extends Controller
      */
     public function store(StorePersonalRequest $request)
     {
-        //
+        $validateData = $request->validated();
+        Personal::create($validateData);
+        return redirect('/personal');
     }
 
     /**
@@ -45,7 +56,13 @@ class PersonalController extends Controller
      */
     public function edit(Personal $personal)
     {
-        return view('dashboard.toko.edit');
+        return view("dashboard.personal.edit",[
+            'data'=>$personal,
+            'user'=>User::all(),
+            'toko'=>Toko::all(),
+            'posisi'=>Position::all()
+
+        ]);
     }
 
     /**
@@ -53,7 +70,9 @@ class PersonalController extends Controller
      */
     public function update(UpdatePersonalRequest $request, Personal $personal)
     {
-        //
+        $validateData = $request->validated();
+        Personal::where('id',$personal->id)->update($validateData);
+        return redirect('/personal');
     }
 
     /**

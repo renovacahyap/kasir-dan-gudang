@@ -13,7 +13,9 @@ class TokoController extends Controller
      */
     public function index()
     {
-        return view('dashboard.toko.index');
+        return view('dashboard.toko.index',[
+            'data'=>Toko::all()
+        ]);
     }
 
     /**
@@ -29,7 +31,9 @@ class TokoController extends Controller
      */
     public function store(StoreTokoRequest $request)
     {
-        //
+        $validateData = $request->validated();
+        Toko::create($validateData);
+        return redirect('/toko')->with('success','Toko Berhasil ditambahkan');
     }
 
     /**
@@ -45,7 +49,9 @@ class TokoController extends Controller
      */
     public function edit(Toko $toko)
     {
-        return view('dashboard.toko.edit');
+        return view('dashboard.toko.edit',[
+            'toko'=>$toko
+        ]);
     }
 
     /**
@@ -53,7 +59,9 @@ class TokoController extends Controller
      */
     public function update(UpdateTokoRequest $request, Toko $toko)
     {
-        //
+       $validateData=$request->validated();
+       Toko::where('id',$toko->id)->update($validateData);
+       return redirect('/toko');
     }
 
     /**

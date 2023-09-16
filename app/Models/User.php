@@ -25,9 +25,10 @@ class User extends Authenticatable
 
     protected $guarded = ['id'];
 
-    public function personals(){
-        return $this->belongsTo(Personal::class);
+    public function personal(){
+        return $this->hasMany(Personal::class);
     }
+    
     /**
      * The attributes that should be hidden for serialization.
      *

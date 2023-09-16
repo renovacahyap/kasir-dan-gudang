@@ -13,7 +13,9 @@ class PositionController extends Controller
      */
     public function index()
     {
-        return view('dashboard.posisi.index');
+        return view('dashboard.posisi.index',[
+            'data'=>Position::all()
+        ]);
     }
 
     /**
@@ -29,7 +31,9 @@ class PositionController extends Controller
      */
     public function store(StorePositionRequest $request)
     {
-        //
+        $validateData = $request->validated();
+        Position::create($validateData);
+        return redirect('/position');
     }
 
     /**
@@ -45,7 +49,9 @@ class PositionController extends Controller
      */
     public function edit(Position $position)
     {
-        return view('dashboard.posisi.edit');
+        return view('dashboard.posisi.edit',[
+            'data'=>$position
+        ]);
     }
 
     /**
@@ -53,7 +59,9 @@ class PositionController extends Controller
      */
     public function update(UpdatePositionRequest $request, Position $position)
     {
-        //
+        $validateData = $request->validated();
+        Position::where('id',$position->id)->update($validateData);
+        return redirect('/position');
     }
 
     /**

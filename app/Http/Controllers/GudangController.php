@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Gudang;
 use App\Http\Requests\StoreGudangRequest;
 use App\Http\Requests\UpdateGudangRequest;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class GudangController extends Controller
 {
@@ -13,7 +15,11 @@ class GudangController extends Controller
      */
     public function index()
     {
-        return view('dashboard.gudang.index');
+        // $test = Gudang::with('')->toSql();
+        // dd($test);
+        return view('dashboard.gudang.index',[
+            'data' => Gudang::with('personal.user')->get()
+        ]);
     }
 
     /**
@@ -29,7 +35,12 @@ class GudangController extends Controller
      */
     public function store(StoreGudangRequest $request)
     {
-        //
+        // dd($request);
+        $validateData = $request->validated();
+        $validateData['personal_id'] = 1;
+        // $validateData['personal_id'] = Auth::id();
+        Gudang::create($validateData);
+        return redirect('/gudang');
     }
 
     /**
@@ -45,7 +56,9 @@ class GudangController extends Controller
      */
     public function edit(Gudang $gudang)
     {
-        return view('dashboard.gudang.edit');
+        return view('dashboard.gudang.edit',[
+            'data'=>$gudang
+        ]);
     }
 
     /**
@@ -53,7 +66,12 @@ class GudangController extends Controller
      */
     public function update(UpdateGudangRequest $request, Gudang $gudang)
     {
-        //
+          // dd($request);
+          $validateData = $request->validated();
+          // $validateData['personal_id'] = 1;
+          // $validateData['personal_id'] = Auth::id();
+          Gudang::where('id',$gudang->id)->update($validateData);
+          return redirect('/gudang');
     }
 
     /**
@@ -61,6 +79,7 @@ class GudangController extends Controller
      */
     public function destroy(Gudang $gudang)
     {
-        //
+        Gudang::destroy($gudang->id);
+        return redirect('/gudang');
     }
 }

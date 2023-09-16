@@ -10,10 +10,12 @@ class Gudang extends Model
     use HasFactory;
     protected $guarded = ['id'];
 
-    public function personals()
+    public function personal()
     {
-        return $this->hasMany(Personal::class);
+        return $this->belongsTo(Personal::class);
     }
+
+    
 
     public function pembelians() {
         return $this->belongsTo(Pembelian::class);

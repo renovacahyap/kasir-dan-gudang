@@ -1,7 +1,13 @@
 <?php
 
+use App\Http\Controllers\GudangController;
+use App\Http\Controllers\InvoiceController;
+use App\Http\Controllers\PembelianController;
 use App\Http\Controllers\PersonalController;
+use App\Http\Controllers\PositionController;
+use App\Http\Controllers\TokoController;
 use App\Http\Controllers\UserController;
+use App\Models\Pembelian;
 use App\Models\Toko;
 use Illuminate\Support\Facades\Route;
 
@@ -35,5 +41,8 @@ Route::resource('/gudang',GudangController::class);
 
 // kasir
 Route::resource('/pembelian',PembelianController::class);
+Route::get('/daftar',[PembelianController::class,'daftar']);
 
+//invoice
+Route::resource('/inv',InvoiceController::class);
 // Route::resource('/user',PersonalController::class);

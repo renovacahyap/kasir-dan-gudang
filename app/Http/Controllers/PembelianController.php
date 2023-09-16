@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Pembelian;
+use Illuminate\Http\Request;
 use App\Http\Requests\StorePembelianRequest;
 use App\Http\Requests\UpdatePembelianRequest;
+use App\Models\Gudang;
+use App\Models\Invoice;
 
 class PembelianController extends Controller
 {
@@ -13,7 +16,22 @@ class PembelianController extends Controller
      */
     public function index()
     {
-        return view('kasir.index');
+        // $inv = "INV", sprintf('%07d', $prdid), $jmlpesan + 1  auth()->user()->id;
+        $inv = Invoice::count();
+
+        // dd($inv+1);
+        $invt = "INV". sprintf('%07d', $inv+1);
+
+
+        $total = Pembelian::where('invoice_id',1)->sum('total_harga');
+        // dd((int)$total);
+        // dd($invt);
+        return view('kasir.index',[
+            'barang' => Gudang::all(),
+            'data' => Pembelian::where('invoice_id',1)->get(),
+            'inv' => $invt,
+            'total' => $total
+        ]);
     }
 
     /**
@@ -29,7 +47,9 @@ class PembelianController extends Controller
      */
     public function store(StorePembelianRequest $request)
     {
-        //
+        $validateData = $request->validated();
+        Pembelian::create($validateData);
+        return redirect('/pembelian');
     }
 
     /**
@@ -62,5 +82,24 @@ class PembelianController extends Controller
     public function destroy(Pembelian $pembelian)
     {
         //
+    }
+
+
+    public function daftar(Request $request) {
+        $id = $request->query('id');
+        $pecah = explode(',',$id);
+        $result = Gudang::whereIn('kode_barang',$pecah)->get()->toJson();
+
+        // dd($result);
+        // $json = json_encode($result);
+        // dd($result->toJson(JSON_PRETTY_PRINT));
+
+        // $hasil = collect($json)[0];
+
+        // dd(collect($json));
+        return $result;
+        // return $id;
+
+        // Gudang::whereIn('id',);
     }
 }

@@ -11,7 +11,7 @@ class Toko extends Model
 
     protected $guarded = ['id'];
 
-    public function personals(){
-        return $this->belongsTo(Personal::class);
+    public function personal(){
+        return $this->hasMany(Personal::class);
     }
 }

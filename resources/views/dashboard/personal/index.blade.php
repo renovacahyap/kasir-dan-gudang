@@ -18,27 +18,22 @@
             <th>Nama</th>
             <th>Toko</th>
             <th>Posisi</th>
+            <th>Aksi</th>
           </tr>
         </thead>
         <tbody>
+          @foreach ($data as $datas)
           <tr>
-            <th>1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
+            <th>{{ $loop->iteration }}</th>
+            <td>{{ $datas->user->name }}</td>
+            <td>{{ $datas->toko->nama_toko }}</td>
+            <td>{{ $datas->position->nama_posisi }}</td>
+            <td>
+              <a class="btn btn-warning" href="/personal/{{ $datas->id }}/edit" role="button"><i class="bi bi-pencil-square"></i></a>
+              <a class="btn btn-danger ms-1" href="#" role="button"><i class="bi bi-trash"></i></a></td>
           </tr>
-          <tr>
-            <th>2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <th>3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-          </tr>
+          @endforeach
+          
         </tbody>
       </table>
 </div>

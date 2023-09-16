@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Symfony\Contracts\Service\Attribute\Required;
 
 class StoreGudangRequest extends FormRequest
 {
@@ -11,7 +12,7 @@ class StoreGudangRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +23,11 @@ class StoreGudangRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'kode_barang' => 'required|unique:gudangs',
+            'nama_barang' => 'required',
+            'stock' => 'required',
+            'harga' => 'required',
+            'personal_id' => 'required'
         ];
     }
 }

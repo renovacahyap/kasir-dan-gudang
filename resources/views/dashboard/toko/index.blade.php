@@ -3,42 +3,36 @@
 
 <!-- Greeting Login -->
 <div class="container p-3 ">
-    <h3>User</h3>
+    <h3>Toko</h3>
 </div>
 <!-- End Greeting Login -->
 
 <!-- card section -->
 <div class="container p-3">
 
-    <a class="btn btn-dark" href="/user/create" role="button">Tambah Personal</a>
+    <a class="btn btn-dark" href="/toko/create" role="button">Tambah Toko</a>
     <table class="table table-striped table-dark my-3">
         <thead>
           <tr>
             <th>#</th>
-            <th>Nama</th>
-            <th>Toko</th>
-            <th>Posisi</th>
+            <th>Nama Toko</th>
+            <th>Alamat</th>
+            <th>Aksi</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <th>1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <th>2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <th>3</th>
-            <td>Larry</td>
-            <td>the Bird</td>
-            <td>@twitter</td>
-          </tr>
+          @foreach ($data as $datas)
+            <tr>
+              <th>{{ $loop->iteration }}</th>
+              <td>{{ $datas->nama_toko }}</td>
+              <td>{{ $datas->alamat }}</td>
+              <td>
+                <a class="btn btn-warning" href="/toko/{{ $datas->id }}/edit" role="button"><i class="bi bi-pencil-square"></i></a>
+                <a class="btn btn-danger ms-1" href="#" role="button"><i class="bi bi-trash"></i></a></td>
+            </tr>
+              
+          @endforeach
+         
         </tbody>
       </table>
 </div>
