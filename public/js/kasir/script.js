@@ -1,6 +1,11 @@
 $(document).ready(function () {
-    let data = [];
-
+    // let data = [];
+   
+    // if ( confirm("Cetak Struk") == true) {
+    //     window.open("/", '_blank');
+    // } else{
+    //     return false;
+    // }
 
     function formatRupiah(angka, prefix) {
         var number_string = angka.replace(/[^,\d]/g, '').toString(),
@@ -19,15 +24,30 @@ $(document).ready(function () {
         return prefix == undefined ? rupiah : (rupiah ? 'Rp. ' + rupiah : '');
     }
 
+    let tcv = $('#tc').val();
+    $('#tb').html(formatRupiah(tcv, 'Rp. '));
+    $('#tot').html(formatRupiah(tcv, 'Rp. '));
+
+
 
     // console.log(data);
     // console.log("abracadabra"+data);
     $('#select').change(function () {
 
+        let idbrg =  $(this).find(':selected').val();
 
+        // alert(idbrg);
         const harga = $(this).find(':selected').attr('data-harga');
         // alert(harga);
         $('#rego').val(harga);
+        
+
+        $.get("/stock?id="+idbrg , function (data) {
+          
+            //    console.log(data[0].stock);
+                const stock = $('#stock').html("/ " + data[0].stock);
+            }
+        );
 
     });
 
@@ -48,6 +68,8 @@ $(document).ready(function () {
         $('#tot').html(formatRupiah(tcv, 'Rp. '));
     });
 
+
+   
 
 
     // console.log(daftar());

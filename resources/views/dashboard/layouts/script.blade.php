@@ -15,4 +15,14 @@ crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script src="https://kit.fontawesome.com/960d8fbe3e.js" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
 
+
+{{-- Datatable --}}
+{{-- <script src="https://cdn.datatables.net/v/bs5/dt-1.13.6/datatables.min.js"></script> --}}
+<script src="//cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+{{-- <script src="https://code.jquery.com/jquery-3.7.0.js"></script> --}}
+{{-- <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script> --}}
+{{-- <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script> --}}
+
+
+
 <!-- <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script> -->

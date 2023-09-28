@@ -1,14 +1,13 @@
-@extends('dashboard.layouts.main')
-@section('container')
-
-<!-- Greeting Login -->
-<div class="container p-3 mt-5">
-    <h3>Tambah Akun</h3>
-</div>
-<!-- End Greeting Login -->
-
-<div class="container p-3">
-    <form action="/user" method="post">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Register</title>
+</head>
+<body>
+    <form action="" method="post">
         @csrf
         <label for="">Nama</label><br>
         <input type="text" class="form-control" name="name" id="" value="{{ old('name') }}" required><br>
@@ -20,17 +19,9 @@
         <input type="password" class="form-control" name="password" id="" required><br>
 
         <label for="">Position</label><br>
-        <select name="status" id="" class="form-select" required>
-            @foreach ($pt as $pp)
-                <option value="{{ $pp->id }}">{{ $pp->nama_posisi }}</option>
-            @endforeach
-        </select><br>
+        <input type="text" name="status" value="1">
 
         <button type="submit" class="btn btn-primary">Tambah</button>
     </form>
-</div>
-
-
-@endsection
-
-
+</body>
+</html>

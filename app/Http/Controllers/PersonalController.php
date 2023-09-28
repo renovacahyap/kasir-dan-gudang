@@ -40,7 +40,8 @@ class PersonalController extends Controller
     {
         $validateData = $request->validated();
         Personal::create($validateData);
-        return redirect('/personal');
+        return redirect('/personal')->with(['success'=> 'Posisi Berhasil Ditambahkan',
+        'warna' => 'success']);
     }
 
     /**
@@ -72,7 +73,8 @@ class PersonalController extends Controller
     {
         $validateData = $request->validated();
         Personal::where('id',$personal->id)->update($validateData);
-        return redirect('/personal');
+        return redirect('/personal')->with(['success'=> 'Posisi Berhasil Diedit',
+        'warna' => 'warning']);
     }
 
     /**

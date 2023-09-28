@@ -8,6 +8,8 @@ use App\Http\Requests\StorePembelianRequest;
 use App\Http\Requests\UpdatePembelianRequest;
 use App\Models\Gudang;
 use App\Models\Invoice;
+use App\Models\Personal;
+use Carbon\Carbon;
 
 class PembelianController extends Controller
 {
@@ -19,18 +21,42 @@ class PembelianController extends Controller
         // $inv = "INV", sprintf('%07d', $prdid), $jmlpesan + 1  auth()->user()->id;
         $inv = Invoice::count();
 
+        // dd(session('url'));
+
+        $user = auth()->user()->id;
+
         // dd($inv+1);
-        $invt = "INV". sprintf('%07d', $inv+1);
+        $invt = "INV". sprintf('%07d', $inv+1) . $user;
 
 
-        $total = Pembelian::where('invoice_id',1)->sum('total_harga');
+
+        // $total = Pembelian::where('invoice_id',$invt)->sum('total_harga');
+        $total = Pembelian::join('gudangs', 'pembelians.gudang_id' , '=','gudangs.id')->where('invoice_id',$invt)->select(['*',Pembelian::raw('qty * total_harga as subtotal')])->get();
+        $tbayar  = $total->sum('subtotal');
+        // dd($total2->sum('subtotal'));
+        if ($tbayar == 0) {
+            $tbayar = null;
+        }
         // dd((int)$total);
         // dd($invt);
+
+        $toko = Personal::select('tokos.nama_toko','tokos.id as idtoko')->join('tokos', 'personals.toko_id', "=", "tokos.id")->where('personals.user_id', $user)->first();
+        $today = $sekarang = Carbon::now()->isoFormat('D MMMM Y');
+        
+
+        // query data asli
+        $datas = Pembelian::join('gudangs', 'pembelians.gudang_id' , '=','gudangs.id')->where('invoice_id',$invt)->get();
+        // dd(Pembelian::join('gudangs', 'pembelians.gudang_id' , '=','gudangs.id')->where('invoice_id',$invt)->select(['*',Pembelian::raw('qty * total_harga as subtotal')])->get());
         return view('kasir.index',[
             'barang' => Gudang::all(),
-            'data' => Pembelian::where('invoice_id',1)->get(),
+            'data' => Pembelian::join('gudangs', 'pembelians.gudang_id' , '=','gudangs.id')->where('invoice_id',$invt)->select(['*',Pembelian::raw('qty * total_harga as subtotal')])->get(),
             'inv' => $invt,
-            'total' => $total
+            'total' => $tbayar,
+            'user' => auth()->user()->name,
+            'toko' => $toko,
+            'today' => $today,
+            'idinv' => $inv+1,
+            'iduser' => $user
         ]);
     }
 
@@ -47,8 +73,19 @@ class PembelianController extends Controller
      */
     public function store(StorePembelianRequest $request)
     {
+
         $validateData = $request->validated();
         Pembelian::create($validateData);
+
+        $idgudang = $validateData['gudang_id']; //1
+        $qty = $validateData['qty']; //10
+
+        $getstockgudang = Gudang::find($idgudang);
+        $stock = $getstockgudang->stock - $qty ;
+
+        Gudang::where('id',$idgudang)->update(['stock' => $stock]);
+
+        
         return redirect('/pembelian');
     }
 
@@ -81,7 +118,8 @@ class PembelianController extends Controller
      */
     public function destroy(Pembelian $pembelian)
     {
-        //
+        Pembelian::destroy($pembelian->id);
+        return redirect('/pembelian');
     }
 
 
@@ -101,5 +139,13 @@ class PembelianController extends Controller
         // return $id;
 
         // Gudang::whereIn('id',);
+    }
+
+
+    public function stock(Request $request) {
+        $idbrg = $request->id;
+        $value = Gudang::where('id',$idbrg)->get();
+
+        return collect($value);
     }
 }

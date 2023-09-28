@@ -24,6 +24,7 @@ class StorePembelianRequest extends FormRequest
         return [
            'invoice_id' => 'required',
            'gudang_id' => 'required',
+           'user_id' => 'required',
            'qty' => 'required',
            'total_harga' => 'required'
         ];

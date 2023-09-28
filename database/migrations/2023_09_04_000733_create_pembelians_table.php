@@ -13,8 +13,9 @@ return new class extends Migration
     {
         Schema::create('pembelians', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('invoice_id');
+            $table->string('invoice_id');
             $table->foreignId('gudang_id');
+            $table->foreignId('user_id');
             $table->integer('qty');
             $table->integer('total_harga');
             $table->timestamps();

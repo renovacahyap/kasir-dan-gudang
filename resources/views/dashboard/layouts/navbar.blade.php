@@ -6,23 +6,27 @@
             <span class="hm-3 d-block"></span>
         </div>
 
-        <div class="d-flex d-sm-none d-none d-lg-flex align-items-center justify-content-between nav-items">
-            <form class="d-flex form px-3">
+        <div class="d-flex d-sm-none d-none d-lg-flex align-items-center justify-content-end nav-items me-5">
+            {{-- <form class="d-flex form px-3">
                 <input type="search" name="" id="" placeholder="Search..." class="border-0 search" />
                 <button class="border-0 sb">
                     <i class="bi bi-search"></i>
                 </button>
-            </form>
+            </form> --}}
             <div class="right-side d-flex align-items-center">
-                <div class="d-flex align-items-center mx-4">
+                {{-- <div class="d-flex align-items-center mx-4">
                     <i class="bi bi-bell-fill position-relative top-0"></i>
                     <span class="d-flex align-items-centers px-2 badge rounded-pill">99+</span>
-                </div>
+                </div> --}}
 
                 <div class="online position-relative">
-                    <input type="image" src="profile.jpg" name="saveForm"
+                    {{-- <input type="image" src="profile.jpg" name="saveForm"
                         class="rounded-circle" id="saveForm" />
-                    <span class="d-block rounded-circle border"></span>
+                    <span class="d-block rounded-circle border"></span> --}}
+                    <form action="/logout" method="POST" id="logout">
+                        @csrf
+                        <a href="javascript:$('#logout').submit()" class="btn btn-danger">Logout</a>
+                    </form>
                     <!-- <img class="rounded-circle" src="profile.jpg" alt=""> -->
                 </div>
             </div>

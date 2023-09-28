@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('gudangs', function (Blueprint $table) {
             $table->id();
             $table->foreignId('personal_id');
+            $table->foreignId('toko_id');
             $table->string('kode_barang')->unique();
             $table->string('nama_barang');
             $table->integer('stock');

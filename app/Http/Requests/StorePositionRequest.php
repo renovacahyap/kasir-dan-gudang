@@ -22,7 +22,8 @@ class StorePositionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'nama_posisi'=>'required'
+            'nama_posisi'=>'required',
+            'user_id' => 'required'
         ];
     }
 }

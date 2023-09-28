@@ -23,7 +23,8 @@ class UpdateTokoRequest extends FormRequest
     {
         return [
             'nama_toko'=> 'required',
-            'alamat'=>'required'
+            'alamat'=>'required',
+            'user_id' => 'required'
         ];
     }
 }

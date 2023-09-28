@@ -2,7 +2,7 @@
 @section('container')
 
 <!-- Greeting Login -->
-<div class="container p-3 ">
+<div class="container p-3 mt-5">
     <h3>Edit Personalia</h3>
 </div>
 <!-- End Greeting Login -->

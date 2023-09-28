@@ -23,7 +23,9 @@ class PositionController extends Controller
      */
     public function create()
     {
-       return view('dashboard.posisi.create');
+       return view('dashboard.posisi.create',[
+            'saya' =>  auth()->user()->id
+       ]);
     }
 
     /**
@@ -33,7 +35,8 @@ class PositionController extends Controller
     {
         $validateData = $request->validated();
         Position::create($validateData);
-        return redirect('/position');
+        return redirect('/position')->with(['success'=> 'Posisi Berhasil Ditambahkan',
+        'warna' => 'success']);
     }
 
     /**
@@ -61,7 +64,8 @@ class PositionController extends Controller
     {
         $validateData = $request->validated();
         Position::where('id',$position->id)->update($validateData);
-        return redirect('/position');
+        return redirect('/position')->with(['success'=> 'Posisi Berhasil Diedit',
+        'warna' => 'warning']);
     }
 
     /**

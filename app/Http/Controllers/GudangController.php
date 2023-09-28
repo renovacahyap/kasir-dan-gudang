@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Gudang;
 use App\Http\Requests\StoreGudangRequest;
 use App\Http\Requests\UpdateGudangRequest;
+use App\Models\Personal;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
@@ -27,7 +28,10 @@ class GudangController extends Controller
      */
     public function create()
     {
-        return view('dashboard.gudang.create');
+    
+        return view('dashboard.gudang.create',[
+            'aku' => Personal::where('user_id',auth()->user()->id)->first(),
+        ]);
     }
 
     /**
@@ -37,10 +41,11 @@ class GudangController extends Controller
     {
         // dd($request);
         $validateData = $request->validated();
-        $validateData['personal_id'] = 1;
+        // $validateData['personal_id'] = 1;
         // $validateData['personal_id'] = Auth::id();
         Gudang::create($validateData);
-        return redirect('/gudang');
+        return redirect('/gudang')->with(['success'=> 'Barang Berhasil Ditambahkan',
+        'warna' => 'success']);
     }
 
     /**
@@ -71,7 +76,8 @@ class GudangController extends Controller
           // $validateData['personal_id'] = 1;
           // $validateData['personal_id'] = Auth::id();
           Gudang::where('id',$gudang->id)->update($validateData);
-          return redirect('/gudang');
+          return redirect('/gudang')->with(['success'=> 'Barang Berhasil Diedit',
+          'warna' => 'warning']);
     }
 
     /**
@@ -79,6 +85,8 @@ class GudangController extends Controller
      */
     public function destroy(Gudang $gudang)
     {
+
+        // dd($gudang);
         Gudang::destroy($gudang->id);
         return redirect('/gudang');
     }

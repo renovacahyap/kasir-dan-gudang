@@ -23,7 +23,9 @@ class TokoController extends Controller
      */
     public function create()
     {
-        return view('dashboard.toko.create');
+        return view('dashboard.toko.create',[
+            'saya' => auth()->user()->id
+        ]);
     }
 
     /**
@@ -33,7 +35,8 @@ class TokoController extends Controller
     {
         $validateData = $request->validated();
         Toko::create($validateData);
-        return redirect('/toko')->with('success','Toko Berhasil ditambahkan');
+        return redirect('/toko')->with(['success'=> 'Toko Berhasil Ditambahkan',
+        'warna' => 'success']);
     }
 
     /**
@@ -61,7 +64,8 @@ class TokoController extends Controller
     {
        $validateData=$request->validated();
        Toko::where('id',$toko->id)->update($validateData);
-       return redirect('/toko');
+       return redirect('/toko')->with(['success'=> 'Toko Berhasil Diedit',
+       'warna' => 'warning']);
     }
 
     /**

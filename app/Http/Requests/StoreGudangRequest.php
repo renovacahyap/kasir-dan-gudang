@@ -27,7 +27,8 @@ class StoreGudangRequest extends FormRequest
             'nama_barang' => 'required',
             'stock' => 'required',
             'harga' => 'required',
-            'personal_id' => 'required'
+            'personal_id' => 'required',
+            'toko_id' => 'required'
         ];
     }
 }

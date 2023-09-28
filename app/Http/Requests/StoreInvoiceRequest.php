@@ -22,8 +22,10 @@ class StoreInvoiceRequest extends FormRequest
     public function rules(): array
     {
         return [
-           'invoice' => 'required',
-           'total_bayar' => 'required'
+           'id' => 'required',
+           'total_harga' => 'required',
+           'user_id' => 'required',
+           'toko_id' => 'required'
         ];
     }
 }

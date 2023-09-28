@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Position;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -14,6 +15,7 @@ class UserController extends Controller
     {
         return view('dashboard.user.index',[
             'data' => User::all()
+           
         ]);
     }
 
@@ -22,7 +24,9 @@ class UserController extends Controller
      */
     public function create()
     {
-        return view('dashboard.user.create');
+        return view('dashboard.user.create',[
+            'pt' => Position::all()
+        ]);
     }
 
     /**
@@ -30,14 +34,17 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+        $request->status;
         $validateData = $request->validate([
            'name' => 'required',
            'username' => 'required',
-           'password' => 'required'
+           'password' => 'required',
+           'status' => ''
         ]);
 
         User::create($validateData);
-        return redirect('/user')->with('success', 'Registration successfull!');
+        return redirect('/user')->with(['success'=> 'User Berhasil Ditambahkan',
+        'warna' => 'success']);
     }
 
     /**
@@ -63,7 +70,10 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+        $validateData = $request->validated();
+        User::where('id',$user->id)->update($validateData);
+        return redirect('/user')->with(['success'=> 'User Berhasil Diedit',
+        'warna' => 'warning']);
     }
 
     /**
