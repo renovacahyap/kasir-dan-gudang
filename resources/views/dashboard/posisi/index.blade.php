@@ -28,9 +28,22 @@
                         <th>{{ $loop->iteration }}</th>
                         <td>{{ $datas->nama_posisi }}</td>
                         <td>
-                            <a class="btn btn-warning" href="/position/{{ $datas->id }}/edit" role="button"><i
-                                    class="bi bi-pencil-square"></i></a>
-                            <a class="btn btn-danger ms-1" href="#" role="button"><i class="bi bi-trash"></i></a>
+                            <div class="d-flex">
+
+
+                                <a class="btn btn-warning" href="/position/{{ $datas->id }}/edit" role="button"><i
+                                        class="bi bi-pencil-square"></i></a>
+
+
+                                <form action="/position/{{ $datas->id }}" method="post">
+                                    @method('delete')
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger ms-1"
+                                        onclick="return confirm('Are you sure?')"><i class="bi bi-trash"></i></button>
+                                </form>
+
+                            </div>
+                            {{-- <a class="btn btn-danger ms-1" href="#" role="button"><i class="bi bi-trash"></i></a> --}}
                         </td>
 
                     </tr>

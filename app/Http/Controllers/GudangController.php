@@ -16,10 +16,11 @@ class GudangController extends Controller
      */
     public function index()
     {
-        // $test = Gudang::with('')->toSql();
+
+        $test = Gudang::with('personal.user')->join('personals', 'personals.id' ,'=' ,"gudangs.personal_id" )->select('gudangs.*','personals.user_id as user_id')->where('user_id', auth()->user()->id )->get();
         // dd($test);
         return view('dashboard.gudang.index',[
-            'data' => Gudang::with('personal.user')->get()
+            'data' => $test
         ]);
     }
 
@@ -88,6 +89,7 @@ class GudangController extends Controller
 
         // dd($gudang);
         Gudang::destroy($gudang->id);
-        return redirect('/gudang');
+        return redirect('/gudang')->with(['success'=> 'Barang Berhasil Dihapus',
+        'warna' => 'danger']);
     }
 }

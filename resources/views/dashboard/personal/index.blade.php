@@ -9,6 +9,12 @@
     <!-- card section -->
     <div class="container p-3">
 
+        @if (session()->has('success'))
+            <div class="alert alert-{{ session('warna') }}" role="alert">
+                {{ session('success') }}
+            </div>
+        @endif
+
         <a class="btn btn-dark mb-4" href="/personal/create" role="button">Tambah Personal</a>
         <table class="table table-striped table-dark my-3" id="example">
             <thead>
@@ -28,9 +34,22 @@
                         <td>{{ $datas->toko->nama_toko }}</td>
                         <td>{{ $datas->position->nama_posisi }}</td>
                         <td>
-                            <a class="btn btn-warning" href="/personal/{{ $datas->id }}/edit" role="button"><i
-                                    class="bi bi-pencil-square"></i></a>
-                            <a class="btn btn-danger ms-1" href="#" role="button"><i class="bi bi-trash"></i></a>
+
+                            <div class="d-flex">
+
+
+                                <a class="btn btn-warning" href="/personal/{{ $datas->id }}/edit" role="button"><i
+                                        class="bi bi-pencil-square"></i></a>
+
+                                <form action="/personal/{{ $datas->id }}" method="post">
+                                    @method('delete')
+                                    @csrf
+                                    <button type="submit" class="btn btn-danger ms-1"
+                                        onclick="return confirm('Are you sure?')"><i class="bi bi-trash"></i></button>
+                                </form>
+                            </div>
+
+                            {{-- <a class="btn btn-danger ms-1" href="#" role="button"><i class="bi bi-trash"></i></a> --}}
                         </td>
                     </tr>
                 @endforeach

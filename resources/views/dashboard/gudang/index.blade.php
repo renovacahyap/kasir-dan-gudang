@@ -34,7 +34,7 @@
                         <td>{{ Str::upper($datas->nama_barang) }}</td>
                         <td>{{ $datas->stock }}</td>
                         <td>{{ $datas->harga }}</td>
-                        <td>{{ $datas->personal->user->name }}</td>
+                        <td>{{ Str::title($datas->personal->user->name)  }}</td>
                         <td>
                             <div class="d-flex">
 

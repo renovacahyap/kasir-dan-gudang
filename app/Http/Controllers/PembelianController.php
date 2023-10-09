@@ -31,7 +31,7 @@ class PembelianController extends Controller
 
 
         // $total = Pembelian::where('invoice_id',$invt)->sum('total_harga');
-        $total = Pembelian::join('gudangs', 'pembelians.gudang_id' , '=','gudangs.id')->where('invoice_id',$invt)->select(['*',Pembelian::raw('qty * total_harga as subtotal')])->get();
+        $total = Pembelian::join('gudangs', 'pembelians.gudang_id' , '=','gudangs.id')->where('invoice_id',$invt)->select(['*',Pembelian::raw('qty * gudangs.harga as subtotal')])->get();
         $tbayar  = $total->sum('subtotal');
         // dd($total2->sum('subtotal'));
         if ($tbayar == 0) {
@@ -47,9 +47,18 @@ class PembelianController extends Controller
         // query data asli
         $datas = Pembelian::join('gudangs', 'pembelians.gudang_id' , '=','gudangs.id')->where('invoice_id',$invt)->get();
         // dd(Pembelian::join('gudangs', 'pembelians.gudang_id' , '=','gudangs.id')->where('invoice_id',$invt)->select(['*',Pembelian::raw('qty * total_harga as subtotal')])->get());
+        
+
+        $qkey = Personal::where('user_id' , auth()->user()->id)->first();
+        $valp = $qkey->toko_id;
+        
+
+        // dd(Pembelian::join('gudangs', 'pembelians.gudang_id' , '=','gudangs.id')->where('invoice_id',$invt)->select(['*','gudangs.kode_barang','gudangs.nama_barang',Pembelian::raw('qty * total_harga as subtotal')])->get());
+
+
         return view('kasir.index',[
-            'barang' => Gudang::all(),
-            'data' => Pembelian::join('gudangs', 'pembelians.gudang_id' , '=','gudangs.id')->where('invoice_id',$invt)->select(['*',Pembelian::raw('qty * total_harga as subtotal')])->get(),
+            'barang' =>Gudang::where('toko_id', $valp)->get(),
+            'data' => Pembelian::join('gudangs', 'pembelians.gudang_id' , '=','gudangs.id')->where('invoice_id',$invt)->select(['pembelians.*','gudangs.id as id_gudang','gudangs.harga','gudangs.kode_barang','gudangs.nama_barang',Pembelian::raw('qty * gudangs.harga  as subtotal')])->get(),
             'inv' => $invt,
             'total' => $tbayar,
             'user' => auth()->user()->name,
@@ -116,9 +125,40 @@ class PembelianController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Pembelian $pembelian)
+    public function destroy(Pembelian $pembelian, Request $request)
     {
         Pembelian::destroy($pembelian->id);
+        // Gudang::update
+
+
+        // ambil id gudang
+        $idgudang = $request->id_gudang;
+        // dd($idgudang);
+
+
+        // stock saat ini
+        $istock = Gudang::select('stock')->where('id',$idgudang)->first(); //199
+        // dd($istock->stock);
+        $ist = $istock->stock;
+
+
+        // request stock
+        $qty = $request->stocki;
+        // dd($qty);
+
+
+
+
+        // modifikasi stock
+
+        $stock = $ist +  $qty;
+
+
+        //190 + 3 = 193 
+        // dd($stock);
+
+
+        Gudang::where('id',$idgudang)->update(['stock' => $stock]);
         return redirect('/pembelian');
     }
 

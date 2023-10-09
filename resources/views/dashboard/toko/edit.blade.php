@@ -16,15 +16,17 @@
         @method('put')
         @csrf
         <label for="">Nama Toko</label><br>
-        <input type="text" class="form-control" name="nama_toko" id="" value="{{ $toko->nama_toko }}">
+        <input type="text" class="form-control my-3" name="nama_toko" id="" value="{{ $toko->nama_toko }}">
         
         <label for="">Alamat</label><br>
         <div class="form-floating">
-            <textarea class="form-control" name="alamat" placeholder="Alamat" id="floatingTextarea2" style="height: 100px">{{ $toko->alamat }}</textarea>
+            <textarea class="form-control my-3" name="alamat" placeholder="Alamat" id="floatingTextarea2" style="height: 100px">{{ $toko->alamat }}</textarea>
             <label for="floatingTextarea2" >Alamat</label>
         </div>
 
-        <button type="submit" class="btn btn-dark">Edit Toko</button>
+        <input type="text" name="user_id" id="" value="{{ $toko->user_id }}" hidden required><br>
+
+        <button type="submit" class="btn btn-warning">Edit Toko</button>
     </form>
 </div>
 <!-- End Card Section -->

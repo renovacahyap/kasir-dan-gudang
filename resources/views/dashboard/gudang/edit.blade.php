@@ -29,7 +29,7 @@
         <label for="">Harga</label><br>
         <input type="text" class="form-control" name="harga" value="{{ $data->harga }}">
          
-        <button type="submit" class="btn btn-dark">Update Barang</button>
+        <button type="submit" class="btn btn-warning my-2">Update Barang</button>
     </form>
 </div>
 <!-- End Card Section -->

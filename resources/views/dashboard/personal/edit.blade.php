@@ -37,7 +37,7 @@
             @endforeach
         </select><br>
         
-        <button type="submit" class="btn btn-dark">Edit Personalia</button>
+        <button type="submit" class="btn btn-warning">Edit Personalia</button>
     </form>
 </div>
 <!-- End Card Section -->

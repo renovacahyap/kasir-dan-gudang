@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
-    <title>Document</title>
+    <title> {{ $inv }}</title>
     <style>
         .dashed {
             border-bottom-style: dashed;
@@ -18,20 +18,25 @@
 
 <body>
     
-    <div class="w-25 border border-dark">
+    <div class="w-50">
         <div class="dashed text-center">
-            INV00000013
+            <div>UD.CAHAYA LUTHFI</div>
+            <div>Bulung Kulon RT.01/RW.02 Kec. Jekolo Kab. Kudus</div>
+           
         </div>
-        <div class="dashed">
-            23.09.23
+        <div class="d-flex justify-content-between dashed">
+            <div> {{ $inv }}</div>
+            <div>{{ now()->format('d.m.Y') }}</div>
+           
+            
         </div>
         <div class="dashed w-100">
-            <table class="table table-responsive table-bordered">
+            <table class="table table-responsive">
                 @foreach ($data as $datas)
                     <tr>
                         <td>{{ $datas->nama_barang }}</td>
                         <td>{{ $datas->qty }}</td>
-                        <td class="text-end">{{ number_format($datas->total_harga) }}</td>
+                        <td class="text-end">{{ number_format($datas->harga) }}</td>
                         <td class="text-end">{{ number_format($datas->subtotal) }}</td>
                     </tr>
                 @endforeach
@@ -54,6 +59,8 @@
 
         </div>
         <div class="dashed text-center">
+            BARANG YANG SUDAH DIBELI TIDAK DAPAT DI KEMBALIKAN
+            <div class="dashed"></div>
             TERIMA KASIH SEMOGA REJEKINYA LANCAR DAN SELALU DIBERKAHI
         </div>
 

@@ -82,6 +82,8 @@ class PersonalController extends Controller
      */
     public function destroy(Personal $personal)
     {
-        //
+        Personal::destroy($personal->id);
+        return redirect('/personal')->with(['success'=> 'Posisi Berhasil Dihapus',
+        'warna' => 'danger']);
     }
 }

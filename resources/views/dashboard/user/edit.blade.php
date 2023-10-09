@@ -12,15 +12,15 @@
         @method('put')
         @csrf
         <label for="">Nama</label><br>
-        <input type="text" class="form-control" name="name" id="" value="{{ $user->name }}"><br>
+        <input type="text" class="form-control" name="name" id="" value="{{ $user->name }}" required><br>
 
         <label for="">Username</label><br>
-        <input type="text" class="form-control" name="username" id="" value="{{ $user->username }}"><br>
+        <input type="text" class="form-control" name="username" id="" value="{{ $user->username }}" required><br>
 
         <label for="">Password</label><br>
-        <input type="text" class="form-control" name="password" id=""><br>
+        <input type="password" class="form-control" name="password" id="" required><br>
 
-        <button type="submit" class="btn btn-primary">Tambah</button>
+        <button type="submit" class="btn btn-warning">Edit</button>
     </form>
 </div>
 

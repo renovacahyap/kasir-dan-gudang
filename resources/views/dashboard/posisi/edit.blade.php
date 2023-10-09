@@ -15,11 +15,13 @@
         @method('put')
         @csrf
         <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="floatingInput" name="nama_posisi" value="{{ $data->nama_posisi }}">
+            <input type="text" class="form-control" id="floatingInput" name="nama_posisi" value="{{ $data->nama_posisi }}" required>
             <label for="floatingInput">Nama Posisi</label>
         </div>
 
-        <button type="submit" class="btn btn-dark">Edit Posisi</button>
+        <input type="text" name="user_id" id="" value="{{ $data->user_id }}" hidden required><br>
+
+        <button type="submit" class="btn btn-warning">Edit Posisi</button>
     </form>
 </div>
 <!-- End Card Section -->

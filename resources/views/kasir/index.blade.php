@@ -22,7 +22,7 @@
                 <div class="col">
                     <div class="d-flex flex-column justify-content-between h-100">
 
-                        <h1 class="inter">logo</h1>
+                        <h1 class="inter">UD. LUTHFI</h1>
                         <div class="group-cari">
                             <label class="lb-kdbrg" for="">Invoice</label><br>
                             <div class="d-flex mb-3">
@@ -79,12 +79,14 @@
                                         <td>{{ $datas->kode_barang }}</td>
                                         <td>{{ $datas->nama_barang }}</td>
                                         <td>{{ $datas->qty }}</td>
-                                        <td>{{ $datas->total_harga }}</td>
+                                        <td>{{ $datas->harga }}</td>
                                         <td>{{ $datas->subtotal }}</td>
                                         <td>
                                             <form action="/pembelian/{{ $datas->id }}" method="post">
                                                 @method('delete')
                                                 @csrf
+                                                <input class="text-dark" type="text" value="{{ $datas->id_gudang }}" name="id_gudang" hidden>
+                                                <input class="text-dark" type="text" name="stocki" value="{{ $datas->qty }}" hidden>
                                                 <button type="submit" class="btn btn-danger ms-1"><i
                                                         class="bi bi-trash-fill"></i></button>
                                             </form>
@@ -114,7 +116,7 @@
                         <input type="text" class="text-dark" name="toko_id" value="{{ $toko->idtoko }}" hidden>
                         <div class="">
                             <label for="" class="text-dark inter-24">Total Custom</label><br>
-                            <input type="text" class="text-dark" name="total_harga" id="tc"
+                            <input type="text" class=" w-50 text-dark" name="total_harga" id="tc"
                                 value="{{ $total }}" required>
                         </div>
                 </div>
@@ -205,7 +207,7 @@
             document.addEventListener("DOMContentLoaded", () => {
                 const url = "{{ session('tai') }}";
                 // alert(url);
-                if (confirm("Cetak Struk") == true) {
+                if (confirm("Cetak Struk ?") == true) {
                     window.open(url, '_blank');
                 } else {
                     return false;

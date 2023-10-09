@@ -15,14 +15,14 @@
         @csrf
 
         <label for="">Nama Toko</label><br>
-        <input type="text" class="form-control" name="nama_toko" id="" value="{{ old('nama_toko') }}">
+        <input type="text" class="form-control" name="nama_toko" id="" value="{{ old('nama_toko') }}" required>
         
         <label for="">Alamat</label><br>
         <div class="form-floating">
-            <textarea class="form-control" name="alamat" placeholder="Alamat" id="floatingTextarea2" style="height: 100px">{{ old('username') }}</textarea>
+            <textarea class="form-control" name="alamat" placeholder="Alamat" id="floatingTextarea2" style="height: 100px" required>{{ old('username') }}</textarea>
             <label for="floatingTextarea2">Alamat</label>
         </div>
-        <input type="text" name="user_id" id="" value="{{ $saya }}" hidden><br>
+        <input type="text" name="user_id" id="" value="{{ $saya }}" hidden required><br>
 
         <button type="submit" class="btn btn-dark">Tambah Toko</button>
     </form>

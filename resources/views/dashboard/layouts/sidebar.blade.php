@@ -7,19 +7,20 @@
         <ul class="mt-md-5 mt-lg-4">
 
             @can('admin')
-            <li><a href="/">Dashboard</a></li>
-
+            {{-- {{ dd($request) }} --}}
+            <li class=" {{ Request::is('/') ? 'bg-hover' : '' }} "><a href="/">Dashboard</a></li>
+           
             
-            <li><a href="/personal">Personal</a></li>
-            <li><a href="/toko">Toko</a></li>
-            <li><a href="/position">Posisi</a></li>
-            <li><a href="/user">Akun</a></li>
-            <li><a href="/gudang">Gudang</a></li>
+            <li class=" {{ Request::is('personal') || Request::is('personal/*') ? 'bg-hover' : '' }} "><a href="/personal">Personal</a></li>
+            <li class=" {{ Request::is('toko') || Request::is('toko/*') ? 'bg-hover' : '' }}"><a href="/toko">Toko</a></li>
+            <li class=" {{ Request::is('position') || Request::is('position/*') ? 'bg-hover' : '' }}"><a href="/position">Posisi</a></li>
+            <li class=" {{ Request::is('user') || Request::is('user/*') ? 'bg-hover' : '' }}"><a href="/user">Akun</a></li>
+            <li class=" {{ Request::is('gudang') || Request::is('gudang/*') ? 'bg-hover' : '' }}"><a href="/gudang">Gudang</a></li>
             @endcan
 
             @can('gudang')
-            <li><a href="/">Dashboard</a></li>
-            <li><a href="/gudang">Gudang</a></li>
+            <li class=" {{ Request::is('/') ? 'bg-hover' : '' }} "><a href="/">Dashboard</a></li>
+            <li class=" {{ Request::is('gudang') || Request::is('gudang/*') ? 'bg-hover' : '' }}"><a href="/gudang">Gudang</a></li>
             @endcan
         </ul>
     </div>

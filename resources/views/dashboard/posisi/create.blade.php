@@ -15,11 +15,11 @@
     <form action="/position" method="post">
         @csrf
         <div class="form-floating mb-3">
-            <input type="text" class="form-control" id="floatingInput" name="nama_posisi" value="{{ old('nama_posisi') }}">
+            <input type="text" class="form-control" id="floatingInput" name="nama_posisi" value="{{ old('nama_posisi') }}" required>
             <label for="floatingInput">Nama Posisi</label>
         </div>
 
-        <input type="text" name="user_id" id="" value="{{ $saya }}" hidden><br>
+        <input type="text" name="user_id" id="" value="{{ $saya }}" hidden required><br>
 
         <button type="submit" class="btn btn-dark">Tambah Posisi</button>
     </form>

@@ -323,7 +323,7 @@
 
   .sidebar-box {
     display: block;
-    top: 0;
+    /* top: 0; */
     /* position: relative; */
     border-radius: 0 50px 0 0;
     width: 266px;
@@ -358,6 +358,7 @@
   .sidebar-box ul li a {
     font-family: "inter";
     font-size: 24px;
+    font-weight: bolder;
     color: black;
 
     display: block;

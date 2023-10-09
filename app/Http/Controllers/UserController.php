@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Position;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class UserController extends Controller
 {
@@ -70,8 +71,17 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $validateData = $request->validated();
+        $validateData = $request->validate([
+            'name' => 'required',
+            'username' => 'required',
+            'password' => 'required',
+            'status' => ''
+         ]);
+
+        $validateData['password'] = Hash::make($validateData['password']);
+
         User::where('id',$user->id)->update($validateData);
+        
         return redirect('/user')->with(['success'=> 'User Berhasil Diedit',
         'warna' => 'warning']);
     }

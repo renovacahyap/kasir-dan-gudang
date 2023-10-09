@@ -73,6 +73,8 @@ class PositionController extends Controller
      */
     public function destroy(Position $position)
     {
-        //
+        Position::destroy($position->id);
+        return redirect('/position')->with(['success'=> 'Posisi Berhasil Dihapus',
+        'warna' => 'danger']);
     }
 }

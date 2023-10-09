@@ -73,6 +73,8 @@ class TokoController extends Controller
      */
     public function destroy(Toko $toko)
     {
-        //
+        Toko::destroy($toko->id);
+        return redirect('/toko')->with(['success'=> 'Toko Berhasil Dihapus',
+        'warna' => 'danger']);
     }
 }

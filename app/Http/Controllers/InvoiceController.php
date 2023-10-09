@@ -20,15 +20,18 @@ class InvoiceController extends Controller
     {
 
         $inv = $request->inv;
-        // $total = Pembelian::where('invoice_id',$inv)->sum('total_harga');
+        $total = Pembelian::where('invoice_id',$inv)->sum('total_harga');
 
-        $total = Pembelian::join('gudangs', 'pembelians.gudang_id' , '=','gudangs.id')->where('invoice_id',$inv)->select(['*',Pembelian::raw('qty * total_harga as subtotal')])->get();
-        $tbayar  = $total->sum('subtotal');
+        // $total = Pembelian::join('gudangs', 'pembelians.gudang_id' , '=','gudangs.id')->where('invoice_id',$inv)->select(['*',Pembelian::raw('qty * gudangs.total as subtotal')])->get();
+
+        
+        // $tbayar  = $total->sum('subtotal');
 
         //cetak struk
         return view('print',[
-            'data' => Pembelian::join('gudangs', 'pembelians.gudang_id' , '=','gudangs.id')->where('invoice_id',$inv)->select(['*',Pembelian::raw('qty * total_harga as subtotal')])->get(),
-            'total' => $tbayar,
+            'inv' => $inv,
+            'data' => Pembelian::join('gudangs', 'pembelians.gudang_id' , '=','gudangs.id')->where('invoice_id',$inv)->select(['pembelians.*','gudangs.id as id_gudang','gudangs.harga','gudangs.kode_barang','gudangs.nama_barang',Pembelian::raw('qty * gudangs.harga  as subtotal')])->get(),
+            'total' => $total,
         
         ]);
     }
